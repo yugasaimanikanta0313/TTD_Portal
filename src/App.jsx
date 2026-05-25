@@ -1,6 +1,15 @@
 import { useState } from "react";
 
 function App() {
+  const [primaryDetails, setPrimaryDetails] = useState({
+    gotram: "",
+    email: "",
+    city: "",
+    state: "",
+    country: "",
+    pincode: ""
+  });
+
   const [members, setMembers] = useState([
     {
       name: "",
@@ -18,6 +27,13 @@ function App() {
     }
   ]);
 
+  const handlePrimaryDetailsChange = (e) => {
+    setPrimaryDetails((previousDetails) => ({
+      ...previousDetails,
+      [e.target.name]: e.target.value
+    }));
+  };
+
   const handleChange = (index, e) => {
     const updatedMembers = [...members];
 
@@ -29,6 +45,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log("Primary Details:", primaryDetails);
     console.log("Members Data:", members);
 
     alert("TTD Registration Submitted Successfully");
@@ -42,6 +59,88 @@ function App() {
         </h1>
 
         <form onSubmit={handleSubmit}>
+          <div style={styles.memberBox}>
+            <h3>Primary Details</h3>
+
+            <div style={styles.inputGroup}>
+              <label>Gotram</label>
+              <input
+                type="text"
+                name="gotram"
+                placeholder="Enter Gotram"
+                value={primaryDetails.gotram}
+                onChange={handlePrimaryDetailsChange}
+                required
+                style={styles.input}
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                value={primaryDetails.email}
+                onChange={handlePrimaryDetailsChange}
+                required
+                style={styles.input}
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label>City</label>
+              <input
+                type="text"
+                name="city"
+                placeholder="Enter City"
+                value={primaryDetails.city}
+                onChange={handlePrimaryDetailsChange}
+                required
+                style={styles.input}
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label>State</label>
+              <input
+                type="text"
+                name="state"
+                placeholder="Enter State"
+                value={primaryDetails.state}
+                onChange={handlePrimaryDetailsChange}
+                required
+                style={styles.input}
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label>Country</label>
+              <input
+                type="text"
+                name="country"
+                placeholder="Enter Country"
+                value={primaryDetails.country}
+                onChange={handlePrimaryDetailsChange}
+                required
+                style={styles.input}
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <label>Pincode</label>
+              <input
+                type="text"
+                name="pincode"
+                placeholder="Enter Pincode"
+                value={primaryDetails.pincode}
+                onChange={handlePrimaryDetailsChange}
+                required
+                style={styles.input}
+              />
+            </div>
+          </div>
+
           {members.map((member, index) => (
             <div key={index} style={styles.memberBox}>
               <h3>Member {index + 1}</h3>
